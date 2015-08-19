@@ -15,23 +15,23 @@ public class Walls    {
     ShapeRenderer botWall, topWall;
     Vector2 position;
     Random random;
-    float height, width = 40;
+    float height, width = 40, topHeight;
     private final float SPEED = -3;
 
     public Walls() {
+        position = new Vector2(850, 0);
         botWall = new ShapeRenderer();
         topWall = new ShapeRenderer();
         random = new Random();
         height = generateHeight();
+        topHeight = generateTopHeight();
     }
 
-    public void render(Vector2 pos) {
-        this.position = pos;
+    public void render() {
 
+
+        generateBotWall();
         generateTopWall();
-
-
-        oppositeWall();
     }
 
     //create random height
@@ -50,7 +50,7 @@ public class Walls    {
         return -topHeight;
     }
 
-    public void generateTopWall() {
+    public void generateBotWall() {
         botWall.begin(ShapeRenderer.ShapeType.Filled);
         botWall.setColor(Color.CYAN);
         botWall.rect(position.x, position.y, width, height);
@@ -59,23 +59,30 @@ public class Walls    {
     }
 
 
-    public void oppositeWall() {
+    public void generateTopWall() {
         //float height = 480 - getHeight() - Helicopter.
         topWall.begin(ShapeRenderer.ShapeType.Filled);
         topWall.setColor(Color.CYAN);
-        topWall.rect(position.x, 480, width, generateTopHeight());
+        topWall.rect(position.x, 480, width, topHeight);
         topWall.translate(SPEED, 0, 0);
         topWall.end();
 
     }
 
+
     private Rectangle getLowerBounds() {
-        return new Rectangle(position.x, position.y ,width, height);
+         return new Rectangle(position.x, position.y, width ,height);
+    }
+
+    private Rectangle getUpperBounds() {
+        return new Rectangle(position.x, 480, width, topHeight);
     }
 
     public boolean checkCollisions(Helicopter helicopter) {
-        //return if (helicopter.getBounds().overlaps(topWall))
-        return false;
+         if (helicopter.getBounds().overlaps(getLowerBounds()))
+             return true;
+         else return helicopter.getBounds().overlaps(getUpperBounds());
+
     }
 
 

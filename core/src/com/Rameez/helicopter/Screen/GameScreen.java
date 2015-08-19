@@ -24,7 +24,7 @@ public class GameScreen extends Screen {
         camera = new OrthoCamera();
         entityManager = new EntityManager();
         wall = new Walls();
-        position = new Vector2(850, 0);
+
 
     }
 
@@ -43,7 +43,7 @@ public class GameScreen extends Screen {
         entityManager.render(sb);
         sb.end();
 
-        wall.render(position);
+        wall.render();
 
 
     }
