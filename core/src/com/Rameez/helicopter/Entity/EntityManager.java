@@ -18,6 +18,10 @@ public class EntityManager {
 
     }
 
+    public Helicopter getHelicopter() {
+        return helicopter;
+    }
+
     public void update() {
         helicopter.update();
 

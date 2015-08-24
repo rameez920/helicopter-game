@@ -3,9 +3,9 @@ package com.Rameez.helicopter.Screen;
 import com.Rameez.helicopter.Camera.OrthoCamera;
 import com.Rameez.helicopter.Entity.EntityManager;
 import com.Rameez.helicopter.Entity.Walls;
-import com.badlogic.gdx.graphics.Color;
+
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+
 import com.badlogic.gdx.math.Vector2;
 
 /**
@@ -33,6 +33,7 @@ public class GameScreen extends Screen {
         camera.update();
         entityManager.update();
 
+
     }
 
     @Override
@@ -43,7 +44,8 @@ public class GameScreen extends Screen {
         entityManager.render(sb);
         sb.end();
 
-        wall.render();
+
+
 
 
     }
