@@ -6,7 +6,7 @@ import com.badlogic.gdx.math.Vector2;
  * Created by Rameez on 8/23/2015.
  */
 public class Scrollable {
-    protected Vector2 position, veolcity;
+    protected Vector2 position, velocity;
     protected int width, height;
     protected boolean isScrolledLeft;
 
@@ -16,7 +16,7 @@ public class Scrollable {
     }
 
     public void update(float delta) {
-        position.add(veolcity.cpy().scl(delta));
+        position.add(velocity.cpy().scl(delta));
 
        //if object is no longer visible on screen
         if  (position.x + width < 0)

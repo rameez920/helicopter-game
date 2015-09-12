@@ -1,39 +1,54 @@
 package com.Rameez.helicopter.Entity;
 
-import com.Rameez.helicopter.TextureManager;
+import com.Rameez.helicopter.AssetLoader;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 
 /**
  * Created by Rameez on 7/22/2015.
  */
-public class Helicopter extends Entity {
-    private EntityManager entityManager;
-    public static float HEIGHT;
+public class Helicopter  {
+    private Vector2 position, acceleration, velocity;
 
+    private int height, width;
 
-    public Helicopter(Vector2 pos) {
-
-        super(TextureManager.HELICOPTER ,pos, new Vector2(0, -100));
-        HEIGHT = this.getBounds().getHeight();
-
+    public Helicopter(float x, float y, int width, int height) {
+        this.width = width;
+        this.height = height;
+        position = new Vector2(x, y);
+        velocity = new Vector2(0, 0);
+        acceleration = new Vector2(0, 460);
     }
 
-    @Override
-    public void update() {
-        pos.add(direction);
+    public void update(float delta) {
+        velocity.add(acceleration.cpy().scl(delta));
 
-        if (Gdx.input.isKeyPressed(Keys.SPACE)) {
-            setDirection(0, 350);
-        } else {
-            setDirection(0, -350);
+        if (velocity.y > 200) {
+            velocity.y = 200;
         }
+        position.add(velocity.cpy().scl(delta));
     }
 
+    public void onClick() {
+        velocity.y = -140;
+    }
 
+    public float getX() {
+        return position.x;
+    }
+
+    public float getY() {
+        return position.y;
+    }
+
+    public float getWidth() {
+        return width;
+    }
+
+    public float getHeight() {
+        return height;
+    }
 
 
 }
